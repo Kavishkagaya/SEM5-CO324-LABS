@@ -1,0 +1,42 @@
+E/19/309
+Rambukwella H.M.W.K.G.
+
+Ex1)
+    a) What is the response code you received?
+        200
+
+    b) What is the web server and OS used to host this site?
+        Apache/2.4.52 (FreeBSD)
+
+    c) What is the size of the response body?
+        There isn't size defined in chunks because chunks recieve data till get empty chunk
+
+    d) Read the response body into a variable named ‘body’. What is the Python type of the ‘body’ variable?
+        type bytes
+
+    e) Explain why ‘body’ has that particular type with reference to the structure of HTTP responses.
+        because can send many types of files with this data type
+        
+    f) What happens if you request the URL “http://eng.pdn.ac.lk/unknown" ? What about  “http://unknown.pdn.ac.lk"?
+        HTTP Error 404: Not Found
+
+    g) Request the following URL and store the response body in a variable ‘body’. https://ta.wikipedia.org/wiki/%E0%AE%9A%E0%AE%BF%E0%AE%99%E0%AF%8D%E0%AE%95%E0%AE%B3%E0%AE%AE%E0%AF%8D. Try printing the body data.
+        print as bytestring
+
+    h) What difference do you see  if you call the method .decode(“utf-8”) on the body data received in (g) before printing it?
+        print as html document
+
+Ex2)
+    i) Append the string “&format=json&pretty=1” to the search query. What difference do you see in the response?
+        content-type changed to application/x-javascript
+    j) Use request.urlopen to search for the phrase “Rocco's basilisk”. 
+
+    k) What is URL encoding/decoding? Why is it necessary?
+        there can be non ascii characters in url so we have to encode the url to transmit through internet connection.
+
+    l) How would you do a DDG search in Python for your name written in Tamil or Sinhala?
+        https://duckduckgo.com/?va=q&t=hb&q=%E0%B6%9A%E0%B7%80%E0%B7%92%E0%B7%81%E0%B7%8A%E0%B6%9A&ia=web
+
+Ex3)
+    a) 
+
