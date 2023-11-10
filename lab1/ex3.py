@@ -1,11 +1,24 @@
-from urllib import quote, request
+import json
+from urllib import request
+from urllib.parse import quote
 
 
 def ddg_query(search_term: str, nr_results: int) -> list[str]:
     search_term = quote(search_term)
-    with request.urlopen("https://duckduckgo.com/?q="+search_term+"&format=json&pretty=1") as query:
+    query_link = f"https://duckduckgo.com/?q={search_term}&format=json"
+    with request.urlopen(query_link) as query:
         body = query.read()
-        print(body)
+        body = json.loads(body)
+
+        if "Results" in body:
+            results = body["Results"]
+            links = [result["FirstURL"] for result in results]
+            links = links[0:nr_results]
+            return links
+        else:
+            return []
 
 
-ddg_query("hello there", 1)
+result_links = ddg_query("University of Ruhuna", 1)
+for link in result_links:
+    print(link)
