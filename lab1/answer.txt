@@ -38,5 +38,5 @@ Ex2)
         https://duckduckgo.com/?va=q&t=hb&q=%E0%B6%9A%E0%B7%80%E0%B7%92%E0%B7%81%E0%B7%8A%E0%B6%9A&ia=web
 
 Ex3)
-    a) 
+    c) Use HEAD method instead of GET method
 
