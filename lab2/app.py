@@ -66,7 +66,45 @@ def delete_book(book_id):
 
 # CRUD operations for members
 
+@app.route('/members', methods=['GET'])
+def get_members():
+    return jsonify(list(members.values()))
 
+@app.route('/members', methods=['POST'])
+def create_members():
+    data = request.get_json()
+    new_members_id = generate_id(members)
+    new_members = {
+        "id": new_members_id,
+        "name": data["name"],
+        "email": data["email"]
+    }
+    members[new_members_id] = new_members
+    return jsonify(new_members), 201
+
+@app.route('/members/<int:member_id>', methods=['GET'])
+def get_member(member_id):
+    member = members.get(member_id)
+    if member is None:
+        return "Member not found", 404
+    return jsonify(member)
+
+@app.route('/members/<int:member_id>', methods=['PUT'])
+def update_member(member_id):
+    data = request.get_json()
+    member = members.get(member_id)
+    if member is None:
+        return "ember not found", 404
+    member["name"] = data["name"]
+    member["email"] = data["email"]
+    return jsonify(member)
+
+@app.route('/members/<int:member_id>', methods=['DELETE'])
+def delete_member(member_id):
+    member = members.pop(member_id, None)
+    if member is None:
+        return "Member not found", 404
+    return "Member deleted", 204
 
 if __name__ == '__main__':
     app.run(debug=True)

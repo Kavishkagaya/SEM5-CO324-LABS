@@ -1,7 +1,6 @@
 #!/bin/sh
 # Add a new book
-curl -X POST -H "Content-Type: application/json" \
-    -d '{"title": "New Book Title", "author": "A. B. C"}' http://localhost:5000/books
+curl -X POST -H "Content-Type: application/json" -d '{"title": "New Book Title", "author": "A. B. C"}' http://localhost:5000/books
 
 # List all books
 curl http://127.0.0.1:5000/books
