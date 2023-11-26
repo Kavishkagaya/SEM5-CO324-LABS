@@ -15,6 +15,10 @@ members = {
     456: {"id": 456, "name": "User 2", "email": "user2@example.com"},
 }
 
+loan = {
+    1: {"id": 1, "book_id": 1, "member_id": 123, "date": "2020-01-01", "r_date": "2020-01-01"},
+}
+
 # Sample data as a dictionary keyed by loan ID
 loans = {}
 
@@ -105,6 +109,51 @@ def delete_member(member_id):
     if member is None:
         return "Member not found", 404
     return "Member deleted", 204
+
+# crude loan
+@app.route('/loans', methods=['GET'])
+def get_loans():
+    return jsonify(list(loans.values()))
+
+@app.route('/loans', methods=['POST'])
+def create_loans():
+    data = request.get_json()
+    new_loans_id = generate_id(loans)
+    new_loans = {
+        "id": new_loans_id,
+        "book_id": data["book_id"],
+        "member_id": data["member_id"],
+        "date": data["date"],
+        "r_date": data["r_date"],
+    }
+    loans[new_loans_id] = new_loans
+    return jsonify(new_loans), 201
+
+@app.route('/loans/<int:loan_id>', methods=['GET'])
+def get_loan(loan_id):
+    loan = loans.get(loan_id)
+    if loan is None:
+        return "Loan not found", 404
+    return jsonify(loan)
+
+@app.route('/loans/<int:loan_id>', methods=['PUT'])
+def update_loan(loan_id):
+    data = request.get_json()
+    loan = loans.get(loan_id)
+    if loan is None:
+        return "ember not found", 404
+    loan["book_id"] = data["book_id"]
+    loan["member_id"] = data["member_id"]
+    loan["date"] = data["date"]
+    loan["r_date"] = data["r_date"]
+    return jsonify(loan)
+
+@app.route('/loans/<int:loan_id>', methods=['DELETE'])
+def delete_loan(loan_id):
+    loan = loans.pop(loan_id, None)
+    if loan is None:
+        return "Loan not found", 404
+    return "Loan deleted", 204
 
 if __name__ == '__main__':
     app.run(debug=True)
