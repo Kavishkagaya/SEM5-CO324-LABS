@@ -2,21 +2,22 @@ import grpc
 import tasks_pb2
 import tasks_pb2_grpc
 
+
 def create_task(stub, task):
     # Implement logic to send a request to create a new task.
-    pass
+    return stub.CreateTask(task)
 
 def get_task(stub, task_id):
-    # Implement logic to send a request to retrieve a task by its ID.
-    pass
+    # Implement logic to send a request to retrieve a task by its ID
+    return stub.GetTask(tasks_pb2.TaskId(id=task_id))
 
 def update_task(stub, task):
     # Implement logic to send a request to update an existing task.
-    pass
+    return stub.UpdateTask(task)
 
 def delete_task(stub, task_id):
     # Implement logic to send a request to delete a task by its ID.
-    pass
+    return stub.DeleteTask(tasks_pb2.TaskId(id=task_id))
 
 
 def run():
